@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Toaster } from 'react-hot-toast';
 import './App.css';
-import AdminDashboard from './components/admin/AdminDashboard';
 
 const IMAGE_BASE = 'https://gofile-34524c694a.cz5.quickconnect.to/fsdownload/hhlFH856v/sheleg/';
 const DEMO_IMAGES = [
@@ -656,7 +654,6 @@ function App() {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState(null);
   const [error, setError] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     fetch('https://opensheet.elk.sh/13m2YPYP8KjmdkJws-1JtqU96km_DhoqKNKia2r3f6p4/1')
@@ -671,45 +668,15 @@ function App() {
     if (found) {
       setUser(found);
       setError('');
-      
-      // בדיקה אם המשתמש הוא מנהל
-      if (found['תפקיד'] === 'מנהל' || username === 'admin') {
-        setIsAdmin(true);
-      }
     } else {
       setError('שם משתמש או סיסמה שגויים');
     }
   };
 
-  const handleLogout = () => {
-    setUser(null);
-    setIsAdmin(false);
-  };
-
   if (!user) {
-    return (
-      <>
-        <Login onLogin={handleLogin} error={error} />
-        <Toaster position="top-center" />
-      </>
-    );
+    return <Login onLogin={handleLogin} error={error} />;
   }
-
-  if (isAdmin) {
-    return (
-      <>
-        <AdminDashboard onLogout={handleLogout} />
-        <Toaster position="top-center" />
-      </>
-    );
-  }
-
-  return (
-    <>
-      <MainApp street={user['רחוב']} user={user} />
-      <Toaster position="top-center" />
-    </>
-  );
+  return <MainApp street={user['רחוב']} user={user} />;
 }
 
 export default App;
