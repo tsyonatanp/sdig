@@ -1,0 +1,354 @@
+.main-app {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.building-info h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 300;
+}
+
+.building-info p {
+  margin: 5px 0 0 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.time-display {
+  text-align: center;
+}
+
+.current-time {
+  font-size: 3rem;
+  font-weight: 200;
+  margin-bottom: 5px;
+}
+
+.current-date {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 30px;
+  padding: 30px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.image-carousel {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+.carousel-container {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.carousel-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: white;
+  transform: scale(1.2);
+}
+
+.no-images {
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  font-size: 1.2rem;
+}
+
+.messages-section {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.messages-section h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.8rem;
+  font-weight: 300;
+}
+
+.messages-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.message-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.message-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+  color: #ffd700;
+}
+
+.message-card p {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+}
+
+.message-card small {
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.no-messages {
+  text-align: center;
+  opacity: 0.7;
+  font-style: italic;
+}
+
+.weather-section {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.weather-section h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.8rem;
+  font-weight: 300;
+}
+
+.weather-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.weather-temp {
+  font-size: 3rem;
+  font-weight: 200;
+  margin-bottom: 10px;
+}
+
+.weather-condition {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #ffd700;
+}
+
+.weather-humidity {
+  opacity: 0.8;
+}
+
+.shabbat-section {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.shabbat-section h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.8rem;
+  font-weight: 300;
+}
+
+.shabbat-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 25px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.shabbat-time {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.shabbat-time:last-child {
+  border-bottom: none;
+}
+
+.shabbat-time span:first-child {
+  color: #ffd700;
+  font-weight: 500;
+}
+
+.quick-services {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.quick-services h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.8rem;
+  font-weight: 300;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.service-item {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.service-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.service-item span:first-child {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.service-item span:last-child {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.admin-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}
+
+.admin-btn {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.admin-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto auto;
+  }
+  
+  .image-carousel {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  
+  .messages-section {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  
+  .weather-section {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  
+  .shabbat-section {
+    grid-column: 1;
+    grid-row: 4;
+  }
+  
+  .quick-services {
+    grid-column: 1;
+    grid-row: 5;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+  
+  .building-info h1 {
+    font-size: 2rem;
+  }
+  
+  .current-time {
+    font-size: 2rem;
+  }
+  
+  .content-grid {
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .carousel-image {
+    height: 250px;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+} 
