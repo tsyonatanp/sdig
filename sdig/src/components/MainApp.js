@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../config/supabase';
+import { getHebrewDate, getHebrewTime } from '../utils/hebrewDate';
 import './MainApp.css';
 
 function MainApp({ profile, messages: initialMessages, images: initialImages }) {
@@ -9,6 +10,8 @@ function MainApp({ profile, messages: initialMessages, images: initialImages }) 
   const [currentTime, setCurrentTime] = useState(new Date());
   const [messages, setMessages] = useState(initialMessages || []);
   const [images, setImages] = useState(initialImages || []);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+  const [audio] = useState(new Audio('/ניגוני הינוקא.mp3'));
 
   // עדכון זמן כל שנייה
   useEffect(() => {
@@ -111,6 +114,28 @@ function MainApp({ profile, messages: initialMessages, images: initialImages }) 
     };
   }, [profile?.id]);
 
+  // ניהול מוזיקה
+  const toggleMusic = () => {
+    if (isMusicPlaying) {
+      audio.pause();
+      setIsMusicPlaying(false);
+    } else {
+      audio.play();
+      setIsMusicPlaying(true);
+    }
+  };
+
+  // הגדרת אירועי מוזיקה
+  useEffect(() => {
+    audio.addEventListener('ended', () => setIsMusicPlaying(false));
+    audio.addEventListener('error', () => setIsMusicPlaying(false));
+    
+    return () => {
+      audio.removeEventListener('ended', () => setIsMusicPlaying(false));
+      audio.removeEventListener('error', () => setIsMusicPlaying(false));
+    };
+  }, [audio]);
+
   return (
     <div className="main-app">
       {/* Header עם זמן ופרטי בניין */}
@@ -121,15 +146,10 @@ function MainApp({ profile, messages: initialMessages, images: initialImages }) 
         </div>
         <div className="time-display">
           <div className="current-time">
-            {currentTime.toLocaleTimeString('he-IL')}
+            {getHebrewTime(currentTime)}
           </div>
           <div className="current-date">
-            {currentTime.toLocaleDateString('he-IL', { 
-              weekday: 'long', 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
-            })}
+            {getHebrewDate(currentTime)}
           </div>
         </div>
       </header>
@@ -218,28 +238,41 @@ function MainApp({ profile, messages: initialMessages, images: initialImages }) 
         <div className="quick-services">
           <h2>שירותים מהירים</h2>
           <div className="services-grid">
-            <div className="service-item">
+            <div className="service-item" onClick={() => window.open(`tel:${profile?.contact_phone || '100'}`)}>
               <span>📞</span>
               <span>חירום</span>
+            </div>
+            <div className="service-item" onClick={() => window.open(`mailto:${profile?.contact_email || 'info@example.com'}`)}>
+              <span>📧</span>
+              <span>צור קשר</span>
             </div>
             <div className="service-item">
               <span>🔧</span>
               <span>תחזוקה</span>
             </div>
             <div className="service-item">
-              <span>📧</span>
-              <span>צור קשר</span>
-            </div>
-            <div className="service-item">
               <span>📋</span>
               <span>תקנון</span>
             </div>
           </div>
+          {profile?.contact_name && (
+            <div className="contact-info">
+              <p><strong>איש קשר:</strong> {profile.contact_name}</p>
+              <p><strong>טלפון:</strong> {profile.contact_phone}</p>
+              <p><strong>אימייל:</strong> {profile.contact_email}</p>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* כפתור ניהול (רק לאדמין) */}
-      <div className="admin-button">
+      {/* כפתורי בקרה */}
+      <div className="control-buttons">
+        <button 
+          onClick={toggleMusic}
+          className={`music-btn ${isMusicPlaying ? 'playing' : ''}`}
+        >
+          {isMusicPlaying ? '🔇 עצור מוזיקה' : '🎵 הפעל מוזיקה'}
+        </button>
         <button 
           onClick={() => window.location.href = '/admin'}
           className="admin-btn"

@@ -268,12 +268,34 @@
   opacity: 0.9;
 }
 
-.admin-button {
+.contact-info {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contact-info p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.contact-info strong {
+  color: #ffd700;
+}
+
+.control-buttons {
   position: fixed;
   bottom: 30px;
   right: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
+.music-btn,
 .admin-btn {
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
@@ -284,11 +306,18 @@
   cursor: pointer;
   font-size: 1rem;
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
+.music-btn:hover,
 .admin-btn:hover {
   background: rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
+}
+
+.music-btn.playing {
+  background: rgba(255, 193, 7, 0.3);
+  border-color: rgba(255, 193, 7, 0.5);
 }
 
 /* Responsive Design */
